@@ -53,6 +53,8 @@ static NSString *Identifier = @"WeekView";
 // 已过去的时间是否可以被点击选择
 @property (nonatomic, assign)BOOL canSelectPastDays;
 
+@property (nonatomic, assign)BOOL canSelectFutureDays;
+
 // dayView点击回调
 @property (nonatomic, copy)void(^dayViewBlock)(ZYCalendarManager *manager,id);
 

@@ -148,12 +148,12 @@
     CGFloat height1 = monthView1.frame.size.height;
     
     ZYMonthView *tmpView = monthView1;
-    
+
     monthView1 = monthView2;
     monthView2 = monthView3;
     monthView3 = monthView4;
     monthView4 = monthView5;
-    
+
     monthView5 = tmpView;
     monthView5.date = [self.manager.helper addToDate:monthView4.date months:1];
     
@@ -176,11 +176,11 @@
     _date = date;
     _manager.date = date;
     
-    monthView1.date = [self.manager.helper addToDate:date months:-2];
-    monthView2.date = [self.manager.helper addToDate:date months:-1];
-    monthView3.date = date;
-    monthView4.date = [self.manager.helper addToDate:date months:1];
-    monthView5.date = [self.manager.helper addToDate:date months:2];
+    monthView1.date =  [self.manager.helper addToDate:date months:-4];
+    monthView2.date = [self.manager.helper addToDate:date months:-3];
+    monthView3.date = [self.manager.helper addToDate:date months:-2];
+    monthView4.date = [self.manager.helper addToDate:date months:-1];
+    monthView5.date = date;
 }
 
 

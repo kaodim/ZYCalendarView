@@ -91,7 +91,7 @@ alpha:1.0]
 - (NSDateFormatter *)titleDateFormatter {
     if (!_titleDateFormatter) {
         _titleDateFormatter = [self.helper createDateFormatter];
-        _titleDateFormatter.dateFormat = @"yyyy年MM月";
+        _titleDateFormatter.dateFormat = @"MMMM yyyy";
     }
     return _titleDateFormatter;
 }

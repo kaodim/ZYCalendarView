@@ -14,19 +14,21 @@
 
 - (void)setManager:(ZYCalendarManager *)manager {
     _manager = manager;
-    
+
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
     self.tintColor = _manager.selectedBackgroundColor;
-    
+
     [self setTitleColor:_manager.defaultTextColor forState:UIControlStateNormal];
     [self setTitleColor:_manager.selectedTextColor forState:UIControlStateSelected];
     [self setTitleColor:_manager.disableTextColor forState:UIControlStateDisabled];
-    [self setImage:[[UIImage imageNamed:@"circle"] imageWithRenderingMode:_manager.imageRenderingMode] forState:UIControlStateSelected];
-    
+
+    NSBundle *mainBundle = [NSBundle bundleForClass:[ZYDayView self]];
+    [self setImage:[[UIImage imageNamed:@"circle" inBundle:mainBundle compatibleWithTraitCollection:nil] imageWithRenderingMode:_manager.imageRenderingMode] forState:UIControlStateSelected];
+
     [self setImage:nil forState:UIControlStateNormal];
     self.backgroundColor = [UIColor clearColor];
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeState) name:@"changeState" object:nil];
 }
 
@@ -36,19 +38,19 @@
 
 - (void)setDate:(NSDate *)date {
     _date = date;
-    
+
     // 重置状态设置
     self.backgroundColor = [UIColor clearColor];
-    
+
     [self changeState];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
-    
+
     // 多选
     if (_manager.selectionType == ZYCalendarSelectionTypeMultiple) {
-        
+
         self.selected = !self.selected;
         if (self.selected) {
             [_manager.selectedDateArray addObject:_date];
@@ -60,7 +62,7 @@
             }];
         }
     }
-    
+
     // 单选
     else if (_manager.selectionType == ZYCalendarSelectionTypeSingle) {
         if (_manager.selectedDateArray.count) {
@@ -77,7 +79,7 @@
             [_manager.selectedDateArray addObject:_date];
         }
     }
-    
+
     // 范围选择
     else {
         if (_manager.selectedDateArray.count == 0) {
@@ -96,7 +98,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"changeState" object:nil];
         }
     }
-    
+
     if (self.manager.dayViewBlock) {
         self.manager.dayViewBlock(_manager, _date);
     }
@@ -104,19 +106,20 @@
 
 // 修改颜色状态
 - (void)changeState {
-    
+    NSBundle *mainBundle = [NSBundle bundleForClass:[ZYDayView self]];
+
     if (_isEmpty) {
-        
+
         self.selected = false;
         self.enabled = false;
         [self setTitle:@"" forState:UIControlStateNormal];
-        
+
         // 多选模式需要对空的dayView背景色进行操作
         if (_manager.selectionType == ZYCalendarSelectionTypeRange &&
             _manager.selectedDateArray.count == 2) {
-            
+
             if ([_manager.helper date:_date isEqualOrAfter:_manager.selectedDateArray[0] andEqualOrBefore:_manager.selectedDateArray[1]]) {
-                
+
                 // 和开始日期相同(一个monthView中属于上个月的DayView没有title, 但是date和本月第一天相同)
                 // 开始的是一个月的第一天
                 if ([_manager.helper date:_date isTheSameDayThan:_manager.selectedDateArray[0]] &&
@@ -138,21 +141,22 @@
             self.backgroundColor = [UIColor clearColor];
         }
     }
-    
+
     // 非空dayView的状态
     else {
-        
+
         self.enabled = true;
         [self setTitle:[_manager.dayDateFormatter stringFromDate:_date] forState:UIControlStateNormal];
-        
-        
+
+
         // 当前时间
         if ([_manager.helper date:_date isTheSameDayThan:_manager.date] && self.enabled) {
-            [self setImage:[[UIImage imageNamed:@"circle_cir"] imageWithRenderingMode:_manager.imageRenderingMode] forState:UIControlStateNormal];
+
+            [self setImage:[[UIImage imageNamed:@"circle_cir" inBundle:mainBundle compatibleWithTraitCollection:nil] imageWithRenderingMode:_manager.imageRenderingMode] forState:UIControlStateNormal];
         } else {
             [self setImage:nil forState:UIControlStateNormal];
         }
-        
+
         // 过去的时间能否点击
         if (!_manager.canSelectPastDays &&
             ![_manager.helper date:_date isTheSameDayThan:_manager.date] &&
@@ -161,7 +165,15 @@
         } else {
             self.enabled = true;
         }
-        
+
+        if (!_manager.canSelectFutureDays &&
+            ![_manager.helper date:_date isTheSameDayThan:_manager.date] &&
+            [_date compare:_manager.date] == NSOrderedDescending) {
+            self.enabled = false;
+        } else {
+            self.enabled = true;
+        }
+
         // 单选
         if (_manager.selectionType == ZYCalendarSelectionTypeSingle) {
             if (_manager.selectedDateArray.count && [_manager.helper date:_date isTheSameDayThan:_manager.selectedDateArray.firstObject]) {
@@ -170,7 +182,7 @@
                 self.selected = false;
             }
         }
-        
+
         // 多选
         else if (_manager.selectionType == ZYCalendarSelectionTypeMultiple) {
             self.selected = false;
@@ -183,7 +195,7 @@
                 }
             }
         }
-        
+
         // 范围选择
         else if (_manager.selectionType == ZYCalendarSelectionTypeRange) {
             self.selected = false;
@@ -196,7 +208,7 @@
                     break;
                 }
             }
-            
+
             if (_manager.selectedDateArray.count == 2) {
                 // 设置背景色
                 if ([_manager.helper date:_date
@@ -208,21 +220,21 @@
                     self.backgroundColor = [UIColor clearColor];
                     self.selected = false;
                 }
-                
+
                 // 设置起始按钮背景图片
                 if ([_manager.helper date:_date isTheSameDayThan:_manager.selectedDateArray[0]]) {
-                    [self setBackgroundImage:[[UIImage imageNamed:@"backImg_start"] imageWithRenderingMode:_manager.imageRenderingMode]
-                                    forState:UIControlStateSelected];
+                    [self setBackgroundImage:[[UIImage imageNamed:@"backImg_start" inBundle:mainBundle compatibleWithTraitCollection:nil] imageWithRenderingMode:_manager.imageRenderingMode] forState:UIControlStateSelected];
                     self.selected = true;
                 } else if ([_manager.helper date:_date isTheSameDayThan:_manager.selectedDateArray[1]]) {
-                    [self setBackgroundImage:[[UIImage imageNamed:@"backImg_end"] imageWithRenderingMode:_manager.imageRenderingMode]
-                                    forState:UIControlStateSelected];
+
+                    [self setBackgroundImage:[[UIImage imageNamed:@"backImg_end" inBundle:mainBundle compatibleWithTraitCollection:nil] imageWithRenderingMode:_manager.imageRenderingMode] forState:UIControlStateSelected];
+
                     self.selected = true;
                 } else {
                     [self setBackgroundImage:nil forState:UIControlStateSelected];
                 }
             }
-            
+
         }
     }
 }

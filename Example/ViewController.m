@@ -37,7 +37,12 @@
     ZYCalendarView *view = [[ZYCalendarView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height-64)];
     
     // 不可以点击已经过去的日期
-    view.manager.canSelectPastDays = false;
+    view.manager.canSelectPastDays = true;
+
+    // 不可以点击已经过去的日期
+    view.manager.canSelectFutureDays = false;
+
+
     // 可以选择时间段
     view.manager.selectionType = ZYCalendarSelectionTypeRange;
     
