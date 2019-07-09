@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "AZYCalendarView"
-  s.version      = "0.0.4"
+  s.version      = "0.0.5"
   s.summary      = "Imitate Airbnb's calendar."
 
   # This description is used to generate tags and improve search results.
@@ -96,6 +96,7 @@ Pod::Spec.new do |s|
   # s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
+ s.resources = "ZYCalendarView/Images/*.png"
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -107,12 +108,6 @@ Pod::Spec.new do |s|
   #
 
   # s.resource  = "icon.png"
-
-  s.resource_bundles = {
-    'AZYCalendarView' => [
-    'ZYCalendarView/Images/*.png'
-    ]
-  }
 
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
