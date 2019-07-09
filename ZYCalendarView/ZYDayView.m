@@ -23,8 +23,11 @@
     [self setTitleColor:_manager.selectedTextColor forState:UIControlStateSelected];
     [self setTitleColor:_manager.disableTextColor forState:UIControlStateDisabled];
 
-    NSBundle *mainBundle = [NSBundle bundleForClass:[ZYDayView self]];
-    [self setImage:[[UIImage imageNamed:@"circle" inBundle:mainBundle compatibleWithTraitCollection:nil] imageWithRenderingMode:_manager.imageRenderingMode] forState:UIControlStateSelected];
+    NSBundle *podBundle = [NSBundle bundleForClass:[ZYDayView self]];
+    NSURL *bundleURL = [podBundle resourceURL];
+    NSBundle *bundle = [NSBundle bundleWithURL:bundleURL];
+
+    [self setImage:[[UIImage imageNamed:@"circle" inBundle:bundle compatibleWithTraitCollection:nil] imageWithRenderingMode:_manager.imageRenderingMode] forState:UIControlStateSelected];
 
     [self setImage:nil forState:UIControlStateNormal];
     self.backgroundColor = [UIColor clearColor];
@@ -106,7 +109,9 @@
 
 // 修改颜色状态
 - (void)changeState {
-    NSBundle *mainBundle = [NSBundle bundleForClass:[ZYDayView self]];
+    NSBundle *podBundle = [NSBundle bundleForClass:[ZYDayView self]];
+    NSURL *bundleURL = [podBundle resourceURL];
+    NSBundle *bundle = [NSBundle bundleWithURL:bundleURL];
 
     if (_isEmpty) {
 
@@ -152,7 +157,7 @@
         // 当前时间
         if ([_manager.helper date:_date isTheSameDayThan:_manager.date] && self.enabled) {
 
-            [self setImage:[[UIImage imageNamed:@"circle_cir" inBundle:mainBundle compatibleWithTraitCollection:nil] imageWithRenderingMode:_manager.imageRenderingMode] forState:UIControlStateNormal];
+            [self setImage:[[UIImage imageNamed:@"circle_cir" inBundle:bundle compatibleWithTraitCollection:nil] imageWithRenderingMode:_manager.imageRenderingMode] forState:UIControlStateNormal];
         } else {
             [self setImage:nil forState:UIControlStateNormal];
         }
@@ -223,11 +228,11 @@
 
                 // 设置起始按钮背景图片
                 if ([_manager.helper date:_date isTheSameDayThan:_manager.selectedDateArray[0]]) {
-                    [self setBackgroundImage:[[UIImage imageNamed:@"backImg_start" inBundle:mainBundle compatibleWithTraitCollection:nil] imageWithRenderingMode:_manager.imageRenderingMode] forState:UIControlStateSelected];
+                    [self setBackgroundImage:[[UIImage imageNamed:@"backImg_start" inBundle:bundle compatibleWithTraitCollection:nil] imageWithRenderingMode:_manager.imageRenderingMode] forState:UIControlStateSelected];
                     self.selected = true;
                 } else if ([_manager.helper date:_date isTheSameDayThan:_manager.selectedDateArray[1]]) {
 
-                    [self setBackgroundImage:[[UIImage imageNamed:@"backImg_end" inBundle:mainBundle compatibleWithTraitCollection:nil] imageWithRenderingMode:_manager.imageRenderingMode] forState:UIControlStateSelected];
+                    [self setBackgroundImage:[[UIImage imageNamed:@"backImg_end" inBundle:bundle compatibleWithTraitCollection:nil] imageWithRenderingMode:_manager.imageRenderingMode] forState:UIControlStateSelected];
 
                     self.selected = true;
                 } else {
