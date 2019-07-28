@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "AZYCalendarView"
-  s.version      = "0.0.6"
+  s.version      = "0.0.7"
   s.summary      = "Imitate Airbnb's calendar."
 
   # This description is used to generate tags and improve search results.
