@@ -26,17 +26,17 @@
         _calendar.timeZone = [NSTimeZone localTimeZone];
         _calendar.locale = [NSLocale currentLocale];
     }
-    
+
     return _calendar;
 }
 
 - (NSDateFormatter *)createDateFormatter
 {
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    
+
     dateFormatter.timeZone = self.calendar.timeZone;
     dateFormatter.locale = self.calendar.locale;
-    
+
     return dateFormatter;
 }
 
@@ -69,38 +69,46 @@
 {
     NSDate *firstDay = [self firstDayOfMonth:date];
     NSDate *lastDay = [self lastDayOfMonth:date];
-    
+
     NSDateComponents *componentsA = [self.calendar components:NSCalendarUnitWeekOfYear fromDate:firstDay];
     NSDateComponents *componentsB = [self.calendar components:NSCalendarUnitWeekOfYear fromDate:lastDay];
-    
+
     // weekOfYear may return 53 for the first week of the year
     return (componentsB.weekOfYear - componentsA.weekOfYear + 52 + 1) % 52;
+}
+
+- (NSNumber *) dateDifference:(NSDate *)startDate date:(NSDate *)endDate {
+    NSDateComponents *components = [self.calendar components:NSCalendarUnitDay
+                                                    fromDate:startDate
+                                                      toDate:endDate
+                                                     options:0];
+    return [[NSNumber alloc]initWithInteger:[components day]];
 }
 
 - (NSDate *)firstDayOfMonth:(NSDate *)date
 {
     NSDateComponents *componentsCurrentDate = [self.calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday|NSCalendarUnitWeekOfMonth fromDate:date];
-    
+
     NSDateComponents *componentsNewDate = [NSDateComponents new];
-    
+
     componentsNewDate.year = componentsCurrentDate.year;
     componentsNewDate.month = componentsCurrentDate.month;
     componentsNewDate.weekOfMonth = 1;
     componentsNewDate.day = 1;
-    
+
     return [self.calendar dateFromComponents:componentsNewDate];
 }
 
 - (NSDate *)lastDayOfMonth:(NSDate *)date
 {
     NSDateComponents *componentsCurrentDate = [self.calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday|NSCalendarUnitWeekOfMonth fromDate:date];
-    
+
     NSDateComponents *componentsNewDate = [NSDateComponents new];
-    
+
     componentsNewDate.year = componentsCurrentDate.year;
     componentsNewDate.month = componentsCurrentDate.month + 1;
     componentsNewDate.day = 0;
-    
+
     return [self.calendar dateFromComponents:componentsNewDate];
 }
 
@@ -113,14 +121,14 @@
 - (NSDate *)firstWeekDayOfWeek:(NSDate *)date
 {
     NSDateComponents *componentsCurrentDate = [self.calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday|NSCalendarUnitWeekOfMonth fromDate:date];
-    
+
     NSDateComponents *componentsNewDate = [NSDateComponents new];
-    
+
     componentsNewDate.year = componentsCurrentDate.year;
     componentsNewDate.month = componentsCurrentDate.month;
     componentsNewDate.weekOfMonth = componentsCurrentDate.weekOfMonth;
     componentsNewDate.weekday = self.calendar.firstWeekday;
-    
+
     return [self.calendar dateFromComponents:componentsNewDate];
 }
 
@@ -144,7 +152,7 @@
     }
     NSDateComponents *componentsA = [self.calendar components:NSCalendarUnitYear|NSCalendarUnitWeekOfYear fromDate:dateA];
     NSDateComponents *componentsB = [self.calendar components:NSCalendarUnitYear|NSCalendarUnitWeekOfYear fromDate:dateB];
-    
+
     return componentsA.year == componentsB.year && componentsA.weekOfYear == componentsB.weekOfYear;
 }
 
@@ -155,7 +163,7 @@
     }
     NSDateComponents *componentsA = [self.calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:dateA];
     NSDateComponents *componentsB = [self.calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:dateB];
-    
+
     return componentsA.year == componentsB.year && componentsA.month == componentsB.month && componentsA.day == componentsB.day;
 }
 
@@ -164,7 +172,7 @@
     if([dateA compare:dateB] == NSOrderedAscending || [self date:dateA isTheSameDayThan:dateB]){
         return YES;
     }
-    
+
     return NO;
 }
 
@@ -173,7 +181,7 @@
     if([dateA compare:dateB] == NSOrderedDescending || [self date:dateA isTheSameDayThan:dateB]){
         return YES;
     }
-    
+
     return NO;
 }
 
@@ -181,7 +189,7 @@
     if([dateA compare:dateB] == NSOrderedAscending){
         return YES;
     }
-    
+
     return NO;
 }
 
@@ -189,7 +197,7 @@
     if([dateA compare:dateB] == NSOrderedDescending){
         return YES;
     }
-    
+
     return NO;
 }
 
@@ -198,7 +206,7 @@
     if([self date:date isEqualOrAfter:startDate] && [self date:date isEqualOrBefore:endDate]){
         return YES;
     }
-    
+
     return NO;
 }
 
@@ -206,7 +214,7 @@
     if([self date:date isAfter:startDate] && [self date:date isBefore:endDate]){
         return YES;
     }
-    
+
     return NO;
 }
 

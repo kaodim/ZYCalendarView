@@ -55,6 +55,8 @@ static NSString *Identifier = @"WeekView";
 
 @property (nonatomic, assign)BOOL canSelectFutureDays;
 
+@property (nonatomic, assign)NSUInteger maxDaysAllowedInRange;
+
 // dayView点击回调
 @property (nonatomic, copy)void(^dayViewBlock)(ZYCalendarManager *manager,id);
 

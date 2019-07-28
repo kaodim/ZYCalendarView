@@ -19,7 +19,7 @@
 
 // Must be less or equal to 6
 - (NSUInteger)numberOfWeeks:(NSDate *)date;
-
+- (NSNumber *)dateDifference:(NSDate *)startDate date:(NSDate *)endDate;
 // 第一天
 - (NSDate *)firstDayOfMonth:(NSDate *)date;
 - (NSDate *)firstWeekDayOfMonth:(NSDate *)date;
