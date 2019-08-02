@@ -32,32 +32,24 @@ static NSString *Identifier = @"WeekView";
 // 图片渲染
 @property (nonatomic, assign)UIImageRenderingMode imageRenderingMode;
 
-// 选中状态颜色 默认 0x128963
 @property (nonatomic, strong)UIColor *selectedBackgroundColor;
-// 选中状态的文字颜色
 @property (nonatomic, strong)UIColor *selectedTextColor;
-// 未选中状态的文字颜色
 @property (nonatomic, strong)UIColor *defaultTextColor;
-// 不可用状态的文字颜色
 @property (nonatomic, strong)UIColor *disableTextColor;
 
-// 保存创建日历时的时间
 @property (nonatomic, strong)NSDate *date;
 
-// 保存选中的时间
 @property (nonatomic, strong)NSMutableArray <NSDate *>*selectedDateArray;
 
-// 选择模式 默认单选
 @property (nonatomic, assign)ZYCalendarSelectionType selectionType;
 
-// 已过去的时间是否可以被点击选择
 @property (nonatomic, assign)BOOL canSelectPastDays;
 
 @property (nonatomic, assign)BOOL canSelectFutureDays;
 
+// Set '0' to selecting unlimited date ranges
 @property (nonatomic, assign)NSUInteger maxDaysAllowedInRange;
 
-// dayView点击回调
 @property (nonatomic, copy)void(^dayViewBlock)(ZYCalendarManager *manager,id);
 
 

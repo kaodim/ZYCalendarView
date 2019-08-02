@@ -212,7 +212,7 @@
                     [self setBackgroundImage:nil forState:UIControlStateSelected];
                     break;
                 } else {
-                    if (_manager.selectedDateArray.count == 1) {
+                    if (_manager.maxDaysAllowedInRange != 0 && _manager.selectedDateArray.count == 1) {
                         NSNumber *diff = [_manager.helper dateDifference:_date date:_manager.selectedDateArray[0]];
                         NSNumber *maxAllowed =  [[NSNumber alloc]initWithInteger:_manager.maxDaysAllowedInRange];
                         if ([diff doubleValue] > [maxAllowed doubleValue] ) {

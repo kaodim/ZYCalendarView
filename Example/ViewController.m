@@ -46,7 +46,7 @@
     // 可以选择时间段
     view.manager.selectionType = ZYCalendarSelectionTypeRange;
 
-    view.manager.maxDaysAllowedInRange = 30;
+    view.manager.maxDaysAllowedInRange = 0;
     
     // 设置被选中颜色
     // view.manager.selectedBackgroundColor = [UIColor orangeColor];
