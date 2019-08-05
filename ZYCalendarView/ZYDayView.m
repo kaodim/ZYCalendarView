@@ -255,6 +255,15 @@
     }
 }
 
+- (void)resetCalendar {
+    NSBundle *podBundle = [NSBundle bundleForClass:[ZYDayView self]];
+    NSURL *bundleURL = [podBundle resourceURL];
+    NSBundle *bundle = [NSBundle bundleWithURL:bundleURL];
+
+    [self setImage:[[UIImage imageNamed:@"circle" inBundle:bundle compatibleWithTraitCollection:nil] imageWithRenderingMode:_manager.imageRenderingMode] forState:UIControlStateSelected];
+    [self setBackgroundImage:nil forState:UIControlStateSelected];
+}
+
 
 - (CGRect)titleRectForContentRect:(CGRect)contentRect {
     CGRect frame = contentRect;
