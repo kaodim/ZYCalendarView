@@ -176,13 +176,11 @@
     _date = date;
     _manager.date = date;
     
-    monthView1.date =  [self.manager.helper addToDate:date months:-4];
-    monthView2.date = [self.manager.helper addToDate:date months:-3];
-    monthView3.date = [self.manager.helper addToDate:date months:-2];
-    monthView4.date = [self.manager.helper addToDate:date months:-1];
-    monthView5.date = date;
+    monthView1.date =  [self.manager.helper addToDate:date months:-2];
+    monthView2.date = [self.manager.helper addToDate:date months:-1];
+    monthView3.date = date;
+    monthView4.date = [self.manager.helper addToDate:date months:1];
+    monthView5.date = [self.manager.helper addToDate:date months:2];
 }
-
-
 
 @end
