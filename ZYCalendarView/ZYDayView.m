@@ -33,6 +33,7 @@
     self.backgroundColor = [UIColor clearColor];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeState) name:@"changeState" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetCalendar) name:@"resetCalendar" object:nil];
 }
 
 - (void)dealloc {

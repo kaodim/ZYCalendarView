@@ -114,8 +114,8 @@ alpha:1.0]
 
 -(void) resetCalendar {
     self.selectedDateArray = nil;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeState" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"resetCalendar" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeState" object:nil];
 }
 
 // 单选或者范围选择,通过'selectedStartDay' 和 'selectedEndDay' 的setter方法把date保存到 'selectedDateArray'
