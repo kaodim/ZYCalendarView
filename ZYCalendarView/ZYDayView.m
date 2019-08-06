@@ -239,7 +239,11 @@
                 }
 
                 // 设置起始按钮背景图片
-                if ([_manager.helper date:_date isTheSameDayThan:_manager.selectedDateArray[0]]) {
+                if (([_manager.helper date:_date isTheSameDayThan:_manager.selectedDateArray[0]]) &&
+                    ([_manager.helper date:_date isTheSameDayThan:_manager.selectedDateArray[1]])) {
+                    self.selected = true;
+                }
+                else if ([_manager.helper date:_date isTheSameDayThan:_manager.selectedDateArray[0]]) {
                     [self setBackgroundImage:[[UIImage imageNamed:@"backImg_start" inBundle:bundle compatibleWithTraitCollection:nil] imageWithRenderingMode:_manager.imageRenderingMode] forState:UIControlStateSelected];
                     self.selected = true;
                 } else if ([_manager.helper date:_date isTheSameDayThan:_manager.selectedDateArray[1]]) {
@@ -247,7 +251,8 @@
                     [self setBackgroundImage:[[UIImage imageNamed:@"backImg_end" inBundle:bundle compatibleWithTraitCollection:nil] imageWithRenderingMode:_manager.imageRenderingMode] forState:UIControlStateSelected];
 
                     self.selected = true;
-                } else {
+                }
+                else {
                     [self setBackgroundImage:nil forState:UIControlStateSelected];
                 }
             }

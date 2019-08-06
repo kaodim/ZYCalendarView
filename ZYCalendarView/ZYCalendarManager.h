@@ -57,4 +57,5 @@ static NSString *Identifier = @"WeekView";
 - (void)addToReusePoolWithView:(UIView *)view identifier:(NSString *)identifier;
 - (ZYWeekView *)dequeueReusableWeekViewWithIdentifier:(NSString *)identifier;
 - (void) resetCalendar;
+-(void)setSelectedDates:(NSMutableArray <NSDate *>*)selectedDateArray;
 @end

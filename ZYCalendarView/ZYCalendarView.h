@@ -12,7 +12,8 @@
 @class ZYCalendarView;
 
 @interface ZYCalendarView : UIScrollView
-@property (nonatomic, strong)NSDate *date;
+@property (nonatomic, strong)NSDate *maxDate;
+@property (nonatomic, strong)NSDate *selectedDate;
 @property (nonatomic, strong)ZYCalendarManager *manager;
 @property (nonatomic, copy)void(^dayViewBlock)(ZYCalendarManager *manager,id);
 
