@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Example/ViewController.m"
-            timestampString = "586671250.800282"
+            filePath = "ZYCalendarView/ZYCalendarView.m"
+            timestampString = "590905386.017898"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
+            landmarkName = "-loadPreviousPage"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

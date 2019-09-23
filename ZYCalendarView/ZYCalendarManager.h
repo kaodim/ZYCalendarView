@@ -50,6 +50,8 @@ static NSString *Identifier = @"WeekView";
 // Set '0' to selecting unlimited date ranges
 @property (nonatomic, assign)NSUInteger maxDaysAllowedInRange;
 
+@property (nonatomic, assign)NSInteger maxSelectPastMonths;
+
 @property (nonatomic, copy)void(^dayViewBlock)(ZYCalendarManager *manager,id);
 
 

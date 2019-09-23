@@ -29,6 +29,7 @@ alpha:1.0]
         _defaultTextColor = [UIColor blackColor];
         _disableTextColor = [UIColor darkGrayColor];
         _imageRenderingMode = UIImageRenderingModeAlwaysTemplate;
+        _maxSelectPastMonths = -1;
     }
     return self;
 }

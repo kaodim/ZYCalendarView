@@ -117,7 +117,16 @@
 
     if(self.contentOffset.y < monthView1.frame.size.height + monthView2.frame.size.height/2.00){
         // 加载上一页(如果是当前日期的上一个月, 不加载)
-        [self loadPreviousPage];
+
+        if (self.manager.maxSelectPastMonths != -1) {
+            NSInteger monthDiff = [self.manager.helper monthDifference:monthView2.date date:self.selectedDate];
+            if (monthDiff < (self.manager.maxSelectPastMonths - 1)) {
+                [self loadPreviousPage];
+            }
+        } else {
+            [self loadPreviousPage];
+        }
+
     }
     else if(self.contentOffset.y > monthView1.frame.size.height+monthView2.frame.size.height+monthView3.frame.size.height/2.00){
         // 加载下一页

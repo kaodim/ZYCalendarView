@@ -47,13 +47,15 @@
     view.manager.selectionType = ZYCalendarSelectionTypeRange;
 
     view.manager.maxDaysAllowedInRange = 0;
+
+    view.manager.maxSelectPastMonths = 12;
     
     // 设置被选中颜色
     // view.manager.selectedBackgroundColor = [UIColor orangeColor];
     
     // 设置当前日期 请在所有参数设置完之后设置日期
-    view.date = [NSDate date];
-    
+    view.selectedDate = [NSDate date];
+
     view.dayViewBlock = ^(ZYCalendarManager *manager, NSDate *dayDate) {
         // NSLog(@"%@", dayDate);
         for (NSDate *date in manager.selectedDateArray) {

@@ -85,6 +85,16 @@
     return [[NSNumber alloc]initWithInteger:[components day]];
 }
 
+- (NSInteger) monthDifference:(NSDate *)startDate date:(NSDate *)endDate {
+    NSDateComponents *components = [self.calendar components:NSCalendarUnitMonth
+                                                    fromDate:startDate
+                                                      toDate:endDate
+                                                     options:0];
+    
+    return [components month];
+}
+
+
 - (NSDate *)firstDayOfMonth:(NSDate *)date
 {
     NSDateComponents *componentsCurrentDate = [self.calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday|NSCalendarUnitWeekOfMonth fromDate:date];
