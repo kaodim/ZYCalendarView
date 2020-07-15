@@ -15,8 +15,8 @@ Pod::Spec.new do |s|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  s.name         = "KaoAZYCalendarView"
-  s.version      = "0.0.20"
+  s.name         = "AZYCalendarView"
+  s.version      = "0.0.21"
   s.summary      = "Imitate Airbnb's calendar."
 
   # This description is used to generate tags and improve search results.
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
 									模仿Airbnb的日历, 有单选、多选和范围选择三种模式
                    DESC
 
-  s.homepage     = "https://github.com/Yanyinghenmei/ZYCalendarView"
+  s.homepage     = "https://github.com/kaodim/ZYCalendarView"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
